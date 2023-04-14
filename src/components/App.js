@@ -5,14 +5,27 @@ import TaskList from "./TaskList";
 
 import { CATEGORIES, TASKS } from "../data";
 //console.log("Here's the data you're working with");
-console.log({ CATEGORIES, TASKS });
+// console.log({ CATEGORIES, TASKS });
 
 function App() {
   const [selected, setSelected] = useState("All");
+  const [newTaskList, setNewTaskList] = useState(TASKS)
   
   function onButtonClick(value) {
     setSelected(value);
   }
+
+  function onTaskFormSubmit(taskObj) {
+    setNewTaskList([...newTaskList, taskObj])
+  };
+
+  function onDeleteClick(value) {
+    setNewTaskList(newTaskList.filter((task) => {
+      return task.text !== value
+    }))
+  }
+
+  console.log(newTaskList, "from app")
 
   return (
     <div className="App">
@@ -21,8 +34,13 @@ function App() {
         categories={CATEGORIES} 
         onButtonClick={onButtonClick} 
         selected={selected} />
-      <NewTaskForm />
-      <TaskList tasks={TASKS} selected={selected} />
+      <NewTaskForm 
+        categories={CATEGORIES} 
+        onTaskFormSubmit={onTaskFormSubmit} />
+      <TaskList 
+        tasks={newTaskList} 
+        selected={selected} 
+        onDeleteClick={onDeleteClick} />
     </div>
   );
 }

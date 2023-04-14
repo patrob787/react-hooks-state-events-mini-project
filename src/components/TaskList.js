@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import Task from "./Task";
 
-function TaskList({ tasks, selected }) {
-  const [tasksList, setTasksList] = useState(tasks);
-
-  function onDeleteClick(value) {
-    setTasksList(tasksList.filter((task) => {
-      return task.text !== value
-    }))
-  }
-
-  const selectedTasks = tasksList.filter((task) => {
+function TaskList({ tasks, selected, onDeleteClick }) {
+  
+  console.log(tasks, "from task list")
+  
+  const selectedTasks = tasks.filter((task) => {
     if (selected === "All") {
       return true;
     } else {
