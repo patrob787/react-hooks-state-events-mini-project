@@ -4,9 +4,9 @@ import Task from "./Task";
 function TaskList({ tasks, selected }) {
   const [tasksList, setTasksList] = useState(tasks);
 
-  function onDeleteClick(text) {
+  function onDeleteClick(value) {
     setTasksList(tasksList.filter((task) => {
-      return task.text !== text
+      return task.text !== value
     }))
   }
 
