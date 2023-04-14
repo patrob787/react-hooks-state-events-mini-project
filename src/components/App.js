@@ -25,6 +25,14 @@ function App() {
     }))
   }
 
+  const selectedTasks = newTaskList.filter((task) => {
+    if (selected === "All") {
+      return true;
+    } else {
+      return task.category === selected;
+    }
+  })
+
   console.log(newTaskList, "from app")
 
   return (
@@ -38,8 +46,7 @@ function App() {
         categories={CATEGORIES} 
         onTaskFormSubmit={onTaskFormSubmit} />
       <TaskList 
-        tasks={newTaskList} 
-        selected={selected} 
+        tasks={selectedTasks} 
         onDeleteClick={onDeleteClick} />
     </div>
   );
